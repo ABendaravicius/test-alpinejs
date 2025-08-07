@@ -100,6 +100,15 @@ document.addEventListener("alpine:init", () => {
             return value.toString().padStart(2, "0");
         },
     }));
+
+    Alpine.data("howItWorks", () => ({
+        steps: [
+            "Find a quiet place where you can relax",
+            "Access the hypnotherapy recording in our member area",
+            "Listen to one 15-minute session per day",
+            "Enjoy the first results in one week",
+        ],
+    }));
 });
 
 Alpine.start();

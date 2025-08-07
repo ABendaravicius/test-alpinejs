@@ -155,6 +155,23 @@
             </div>
         </section>
 
+        <!-- How does it work -->
+        <section x-data="howItWorks" class="container mx-auto mb-12 px-3">
+            <h2 class="mb-5 text-[22px] leading-[1.1] text-primary-600 text-center">
+                How does it work?
+            </h2>
+            <div class="grid gap-2.5">
+                <template x-for="(step, index) in steps">
+                    <div class="py-3 px-4 flex gap-4 items-center bg-success-400 rounded-lg shadow-md">
+                        <div class="flex h-10 w-10 min-w-10 bg-success-500 rounded-full text-white items-center justify-center">
+                            <span x-text="index + 1" class="text-[28px]"></span>
+                        </div>
+                        <p x-text="step" class="text-sm"></p>
+                    </div>
+                </template>
+            </div>
+        </section>
+
         @dd($products, $routes)
     </body>
 </html>
