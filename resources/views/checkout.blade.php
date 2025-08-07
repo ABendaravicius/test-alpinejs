@@ -162,7 +162,7 @@
             </h2>
             <div class="grid gap-2.5">
                 <template x-for="(step, index) in steps">
-                    <div class="py-3 px-4 flex gap-4 items-center bg-success-400 rounded-lg shadow-md">
+                    <div class="py-3 px-4 flex gap-4 items-center bg-success-400 rounded-xl shadow-md">
                         <div class="flex h-10 w-10 min-w-10 bg-success-500 rounded-full text-white items-center justify-center">
                             <span x-text="index + 1" class="text-[28px]"></span>
                         </div>
@@ -172,6 +172,33 @@
             </div>
         </section>
 
-        @dd($products, $routes)
+        <!-- Reviews -->
+        <section x-data="userReviews" class="container mx-auto mb-12 px-3">
+            <h2 class="mb-5 text-[22px] leading-[1.1] text-primary-600 text-center">
+                Users love our plan
+            </h2>
+
+            <script>
+                window.reviewsData = @json($processedReviews ?? []);
+            </script>
+
+            <div class="grid gap-4">
+                <template x-for="(review, index) in reviews" :key="index">
+                    <div class="p-4 grid gap-3 bg-white rounded-xl text-dark-500">
+                        <div class="flex items-center gap-2">
+                            <div class="h-[50px] w-[50px] flex items-center justify-center rounded-full overflow-hidden">
+                                <img :src="review.photoUrl" :alt="review.name" class="w-full h-full object-cover">
+                            </div>
+                            <div class="grid gap-1.5"> 
+                                <span x-text="getName(review.name, review.age)" class="text-sm font-semibold leading-[16px]"></span>
+                                <span x-text="review.handle" class="text-[10px]"></span>
+                            </div>
+                        </div>
+                        <p x-text="review.description" class="text-xs leading-[1.6]"></p>
+                    </div>
+                </template>
+            </div>
+        </section>
+
     </body>
 </html>

@@ -53,22 +53,32 @@ class CheckoutController extends Controller
                 'name' => 'Dana',
                 'age' => 37,
                 'handle' => '@dana90s',
+                'img' => 'dana.jpg',
                 'description' => 'I was skeptical, but this ADHD management hypnotherapy program helped me address underlying issues like low dopamine levels, stress and anxiety that were triggering my ADHD. What I love most about this plan is that it takes me only 10-15 minutes, and I feel like I\'m becoming more and more focused EVERY SINGLE DAY with no struggle.',
             ],
             [
                 'name' => 'Ashley',
                 'age' => 32,
                 'handle' => '@adh990',
+                'img' => 'ashley.jpg',
                 'description' => 'ADHD is hard. Not having those patterns that are easily followed always create chaos in your life. This was my life and being always late was my worst problem I think. That\'s why I decided to try Happyo. It was easy to commit and now I\'m getting better and better every week!!',
             ],
             [
                 'name' => 'Jim',
                 'age' => 29,
                 'handle' => '@Rollo_jims8544',
+                'img' => 'jim.jpg',
                 'description' => 'Wish I had known about hypnotherapy earlier. I\'ve tried a lot of anti-ADHD programs, but nothing worked for me, because I needed to put in a lot of effort to see a result. But instead of putting in effort, I procrastinated. Happyo is different and hypnotherapy is actually a game-changer for people with ADHD because it\'s simply effortless.',
             ],
         ];
 
-        return view('checkout', compact('products', 'routes'));
+        $processedReviews = collect($reviews)->map(function ($review) {
+            // Create the full, versioned URL for the image
+            $review['photoUrl'] = \Illuminate\Support\Facades\Vite::asset('resources/images/photos/' . $review['img']);
+
+            return $review;
+        })->all();
+
+        return view('checkout', compact('products', 'routes', 'processedReviews'));
     }
 }

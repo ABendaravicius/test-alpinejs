@@ -109,6 +109,19 @@ document.addEventListener("alpine:init", () => {
             "Enjoy the first results in one week",
         ],
     }));
+
+    Alpine.data("userReviews", () => ({
+        reviews: [],
+
+        init() {
+            // Initialize reviews from data passed by Laravel
+            this.reviews = window.reviewsData || [];
+        },
+
+        getName(name, age) {
+            return `${name}, ${age}`;
+        },
+    }));
 });
 
 Alpine.start();
