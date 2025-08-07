@@ -114,7 +114,6 @@ document.addEventListener("alpine:init", () => {
         reviews: [],
 
         init() {
-            // Initialize reviews from data passed by Laravel
             this.reviews = window.reviewsData || [];
         },
 
