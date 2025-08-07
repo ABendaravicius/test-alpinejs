@@ -26,19 +26,19 @@
         </div>
 
         <!-- Header -->
-        <header x-data class="py-4 px-3 mb-4">
+        <header x-data class="py-4 mx-auto px-3 mb-4 max-w-[1440px] lg:px-39">
             <div class="container mx-auto flex justify-between gap-4">
                 <img
                     src="{{ Vite::asset('resources/images/logo.svg') }}"
                     alt="Happyo Logo"
-                    class="max-w-[92px] h-auto"
+                    class="max-w-[92px] h-auto md:max-w-[145px]"
                 />
 
                 <button
                     @click="window.location.href = '{{
                         $routes['default_order_route']
                     }}'"
-                    class="py-1 px-3 bg-primary-500 rounded-full text-white text-sm font-bold cursor-pointer"
+                    class="py-1 px-3 md:py-3 md:px-5 bg-primary-500 rounded-full text-white text-sm font-bold md:font-semibold cursor-pointer"
                 >
                     Claim my plan
                 </button>
@@ -47,10 +47,10 @@
 
         <div class="container mx-auto px-3">
             <h1
-                class="text-[22px] leading-[1.1] font-bold text-center text-primary-600 mb-6"
+                class="max-w-162 mx-auto text-[22px] md:text-4xl leading-[1.1] font-bold text-center text-primary-600 mb-6 md:mb-10"
             >
                 Get your ADHD hypnotherapy plan and see results in first month
-                <span class="text-primary-500">(without any effort)</span>
+                <span class="text-primary-500 italic">(without any effort)</span>
             </h1>
         </div>
 
@@ -67,11 +67,11 @@
                 window.plansData = @json($products ?? []);
             </script>
 
-            <div class="grid grid-rows-3 gap-4 mb-4 text-primary-600">
+            <div class="max-w-90 w-full mx-auto grid grid-rows-3 gap-4 mb-6 text-primary-600">
                 <template x-for="plan in plans" :key="plan.id">
                     <div
                         @click="selectedPlan = plan"
-                        class="py-4 px-2 grid grid-cols-5 rounded-2xl bg-white border border-dark-400 outline-dark-400 cursor-pointer group hover:outline-1"
+                        class="py-4 px-2 w-full grid grid-cols-5 rounded-2xl bg-white border border-dark-400 outline-dark-400 cursor-pointer group hover:outline-1"
                         :class="isSelected(plan) && 'border-success-500 outline-1 outline-success-500'"
                     >
                         <div class="col-span-3 flex items-center gap-2">
@@ -89,7 +89,7 @@
                             <div class="grid gap-2">
                                 <h3
                                     x-text="plan.slug"
-                                    class="text-primary-600 font-semibold"
+                                    class="text-primary-600 font-semibold leading-[1.25]"
                                 ></h3>
                                 <div class="text-xs font-medium">
                                     <span
@@ -125,6 +125,13 @@
                     </div>
                 </template>
 
+                <!-- Task 1.2 -->
+                <div class="p-4 grid gap-1 rounded-2xl border border-dark-200 text-sm text-dark-300">
+                    <p>Selected plan: <span x-text="selectedPlan.slug" class="font-bold" /></p>
+                    <p>For the price of: <span x-text="formatPrice(selectedPlan.pricing['price'])" class="font-bold" /></p>
+                    <p>Billing schedule: <span x-text="getBillingPeriod(selectedPlan.slug)" class="font-bold" /></p>
+                </div>
+
                 <button
                     @click="handleOrder()"
                     class="py-4 px-2 bg-primary-500 rounded-2xl text-white text-lg font-bold cursor-pointer"
@@ -135,7 +142,7 @@
         </section>
 
         <!-- Legal -->
-        <section class="container mx-auto mb-12 px-3">
+        <section class="container max-w-90 mx-auto mb-12 md:mb-16 px-3">
             <p class="mb-5 text-xs text-dark-300">
                 By clicking Get my plan, I agree to pay €15,19 for my plan and
                 that if I do not cancel before the end of the 4-week
@@ -156,7 +163,7 @@
         </section>
 
         <!-- How does it work -->
-        <section x-data="howItWorks" class="container mx-auto mb-12 px-3">
+        <section x-data="howItWorks" class="container max-w-90 mx-auto mb-12 md:mb-16 px-3">
             <h2 class="mb-5 text-[22px] leading-[1.1] text-primary-600 text-center">
                 How does it work?
             </h2>
@@ -173,7 +180,7 @@
         </section>
 
         <!-- Reviews -->
-        <section x-data="userReviews" class="container mx-auto mb-12 px-3">
+        <section x-data="userReviews" class="container max-w-90 md:max-w-240 mx-auto mb-12 md:mb-16 px-3">
             <h2 class="mb-5 text-[22px] leading-[1.1] text-primary-600 text-center">
                 Users love our plan
             </h2>
@@ -182,9 +189,9 @@
                 window.reviewsData = @json($processedReviews ?? []);
             </script>
 
-            <div class="grid gap-4">
+            <div class="grid md:grid-cols-3 items-start gap-4">
                 <template x-for="(review, index) in reviews" :key="index">
-                    <div class="p-4 grid gap-3 bg-white rounded-xl text-dark-500">
+                    <div class="p-4 grid gap-3 bg-white rounded-xl text-dark-500 md:shadow-sm/10">
                         <div class="flex items-center gap-2">
                             <div class="h-[50px] w-[50px] flex items-center justify-center rounded-full overflow-hidden">
                                 <img :src="review.photoUrl" :alt="review.name" class="w-full h-full object-cover">
