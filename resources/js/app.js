@@ -10,6 +10,10 @@ document.addEventListener("alpine:init", () => {
             this.selectedPlan = this.plans.find((plan) => plan.default);
         },
 
+        isSelected(plan) {
+            return this.selectedPlan === plan;
+        },
+
         getMonthFromSlug(slug) {
             return Array.from(slug)[0];
         },
@@ -30,6 +34,10 @@ document.addEventListener("alpine:init", () => {
             let numberOfMonths = parseInt(this.getMonthFromSlug(plan.slug));
             let pricePerMonth = plan.pricing["price"] / numberOfMonths;
             return this.formatPrice(pricePerMonth);
+        },
+
+        handleOrder() {
+            window.location.href = this.selectedPlan.order_route;
         },
     }));
 
